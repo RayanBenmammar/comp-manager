@@ -13,32 +13,26 @@ import jakarta.ws.rs.core.Response;
 @Consumes("application/json")
 public class CompetitionResource {
 
+    private final CompetitionService service;
+
+    public CompetitionResource(CompetitionService service) {
+        this.service = service;
+    }
+
     @GET
     public List<Competition> getAllCompetitions(){
-        return Competition.listAll();
+        return service.getAllCompetitions();
     }
 
     @GET
     @Path("/{id}")
     public Competition getCompetitionById(@PathParam("id") Long id ) {
-        Competition competition = Competition.findById(id);
-        if(competition == null) {
-            throw new NotFoundException("Competition with id " + id + " not found");
-        }
-        return competition;
+        return service.getCompetitionById(id);
     }
 
     @POST
-    @Transactional
     public Response createCompetition(@Valid CompetitionCreateRequest request) {
-        Competition competition = new Competition();
-        competition.name = request.name;
-        competition.startDate = request.startDate;
-        competition.endDate = request.endDate;
-        competition.timezone = request.timezone;
-        competition.location = request.location;
-        competition.description = request.description;
-        competition.persist();
+        Competition competition = service.createCompetition(request);
 
         return Response.created(URI.create("/api/competitions/" + competition.id))
         .entity(competition)
@@ -48,44 +42,15 @@ public class CompetitionResource {
 
     @PUT
     @Path("/{id}")  
-    @Transactional
-    public Competition updateCompetition(@PathParam("id") Long id, @Valid CompetitionUpdateRequest request) {
-        Competition competition = Competition.findById(id);
-        if(competition == null) {
-            throw new NotFoundException("Competition with id " + id + " not found");
-        }
-        if(request.name != null) {
-            competition.name = request.name;
-        }
-        if(request.startDate != null) {
-            competition.startDate = request.startDate;
-        }
-        if(request.endDate != null) {
-            competition.endDate = request.endDate;
-        }
-        if(request.timezone != null) {
-            competition.timezone = request.timezone;
-        }
-        if(request.location != null) {
-            competition.location = request.location;
-        }
-        if(request.description != null) {
-            competition.description = request.description;
-        }
-        if(request.status != null) {
-            competition.status = request.status;
-        }
-        return competition;
+    public Response updateCompetition(@PathParam("id") Long id, @Valid CompetitionUpdateRequest request) {
+        Competition competition = service.updateCompetition(id, request);
+        return Response.ok(competition).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @Transactional
     public Response deleteCompetition(@PathParam("id") Long id) {
-        boolean deleted = Competition.deleteById(id);
-        if (!deleted) {
-            throw new NotFoundException("Competition with id " + id + " not found");
-        }
+        service.deleteCompetition(id);
         return Response.noContent().build();
     }
 

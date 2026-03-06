@@ -17,8 +17,8 @@ class CompetitionResourceTest {
         String body = """
                 {
                     "name": "CrossFit Open 2025",
-                    "startDate": "2025-06-15",
-                    "endDate": "2025-06-17",
+                    "startDate": "2027-06-15",
+                    "endDate": "2027-06-17",
                     "timezone": "Europe/Paris",
                     "location": "Box Paris 11",
                     "description": "Compétition locale"
@@ -32,8 +32,8 @@ class CompetitionResourceTest {
                 .then()
                 .statusCode(201)
                 .body("name", is("CrossFit Open 2025"))
-                .body("startDate", is("2025-06-15"))
-                .body("endDate", is("2025-06-17"))
+                .body("startDate", is("2027-06-15"))
+                .body("endDate", is("2027-06-17"))
                 .body("timezone", is("Europe/Paris"))
                 .body("status", is("DRAFT"))
                 .extract().path("id");
@@ -53,7 +53,7 @@ class CompetitionResourceTest {
         String body = """
                 {
                     "name": "WOD Challenge",
-                    "startDate": "2025-09-20",
+                    "startDate": "2027-09-20",
                     "timezone": "Europe/London"
                 }
                 """;
@@ -65,7 +65,7 @@ class CompetitionResourceTest {
                 .then()
                 .statusCode(201)
                 .body("name", is("WOD Challenge"))
-                .body("startDate", is("2025-09-20"))
+                .body("startDate", is("2027-09-20"))
                 .body("endDate", nullValue())
                 .body("timezone", is("Europe/London"));
     }
@@ -85,8 +85,8 @@ class CompetitionResourceTest {
         String body = """
                 {
                     "name": "À supprimer",
-                    "startDate": "2025-07-01",
-                    "timezone": "UTC"
+                    "startDate": "2027-07-01",
+                    "timezone": "Europe/London"
                 }
                 """;
 
