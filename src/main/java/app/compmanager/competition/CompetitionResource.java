@@ -3,7 +3,6 @@ package app.compmanager.competition;
 import java.net.URI;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
