@@ -39,6 +39,9 @@ public class Participant extends PanacheEntityBase {
     @Column(unique = true)
     public String email;
 
+    @Column(name = "affiliate_name")
+    public String affiliateName;
+
     @Enumerated(EnumType.STRING)
     public ParticipantGender gender;
 

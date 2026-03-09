@@ -18,6 +18,8 @@ public class ParticipantCreateRequest {
 	@Email(message = "Participant email must be valid")
 	public String email;
 
+	public String affiliateName;
+
 	public ParticipantGender gender;
 
 	@NotNull(message = "Competition id is mandatory")

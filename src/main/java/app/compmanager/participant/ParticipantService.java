@@ -44,6 +44,7 @@ public class ParticipantService {
 		participant.firstName = request.firstName;
 		participant.lastName = request.lastName;
 		participant.email = request.email;
+		participant.affiliateName = normalizeAffiliateName(request.affiliateName);
 		participant.gender = request.gender;
 		participant.competition = competition;
 		participant.division = division;
@@ -85,6 +86,9 @@ public class ParticipantService {
 		if (request.email != null) {
 			participant.email = request.email;
 		}
+		if (request.affiliateName != null) {
+			participant.affiliateName = normalizeAffiliateName(request.affiliateName);
+		}
 		if (request.gender != null) {
 			participant.gender = request.gender;
 		}
@@ -110,6 +114,15 @@ public class ParticipantService {
 		if (!division.competition.id.equals(competition.id)) {
 			throw new BadRequestException("Division does not belong to the given competition");
 		}
+	}
+
+	private String normalizeAffiliateName(String affiliateName) {
+		if (affiliateName == null) {
+			return null;
+		}
+
+		String trimmedAffiliateName = affiliateName.trim();
+		return trimmedAffiliateName.isEmpty() ? null : trimmedAffiliateName;
 	}
 
 }

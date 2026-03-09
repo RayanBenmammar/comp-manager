@@ -21,6 +21,7 @@ class ParticipantResourceTest {
                     "firstName": "Alice",
                     "lastName": "Martin",
                     "email": "alice@example.com",
+                                        "affiliateName": "CrossFit Louvre",
                     "gender": "FEMALE",
                     "competitionId": "%s",
                     "divisionId": "%s"
@@ -35,6 +36,7 @@ class ParticipantResourceTest {
                 .statusCode(201)
                 .body("firstName", is("Alice"))
                 .body("lastName", is("Martin"))
+                .body("affiliateName", is("CrossFit Louvre"))
                 .body("status", is("REGISTERED"))
                 .body("competition.id", is(competitionId))
                 .body("division.id", is(rxDivisionId))
@@ -46,11 +48,13 @@ class ParticipantResourceTest {
                 .then()
                 .statusCode(200)
                 .body("id", is(participantId))
-                .body("email", is("alice@example.com"));
+                                .body("email", is("alice@example.com"))
+                                .body("affiliateName", is("CrossFit Louvre"));
 
         String updateBody = """
                 {
                     "divisionId": "%s",
+                                        "affiliateName": "CrossFit Belleville",
                     "status": "CONFIRMED"
                 }
                 """.formatted(scaledDivisionId);
@@ -62,6 +66,7 @@ class ParticipantResourceTest {
                 .then()
                 .statusCode(200)
                 .body("division.id", is(scaledDivisionId))
+                .body("affiliateName", is("CrossFit Belleville"))
                 .body("status", is("CONFIRMED"));
 
         given()

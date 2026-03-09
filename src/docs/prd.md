@@ -97,7 +97,8 @@ L’organisateur peut :
 - Nom
 - Prénom
 - Email (optionnel)
-- Catégorie (Rx, Scaled, Beginner…)
+- Division
+- Nom d'affiliate / box représentée (optionnel)
 - Genre (optionnel)
 
 ---
@@ -139,7 +140,7 @@ Calcul automatique :
 
 - Classement par WOD
 - Classement global
-- Classement par catégorie
+- Classement par division
 
 #### Affichage
 
@@ -241,6 +242,7 @@ Le projet doit démontrer :
 
 - User
 - Competition
+- Division
 - Participant
 - Wod
 - Score

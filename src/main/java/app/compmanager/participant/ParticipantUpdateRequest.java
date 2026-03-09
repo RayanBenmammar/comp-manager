@@ -14,6 +14,8 @@ public class ParticipantUpdateRequest {
 	@Email(message = "Participant email must be valid")
 	public String email;
 
+	public String affiliateName;
+
 	public ParticipantGender gender;
 
 	public UUID competitionId;
