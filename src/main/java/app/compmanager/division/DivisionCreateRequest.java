@@ -1,5 +1,7 @@
 package app.compmanager.division;
 
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,6 +11,6 @@ public class DivisionCreateRequest {
 	public String name;
 
 	@NotNull(message = "Competition id is mandatory")
-	public Long competitionId;
+	public UUID competitionId;
 
 }

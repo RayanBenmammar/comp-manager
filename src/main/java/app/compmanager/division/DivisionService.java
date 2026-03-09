@@ -1,6 +1,7 @@
 package app.compmanager.division;
 
 import java.util.List;
+import java.util.UUID;
 
 import app.compmanager.competition.Competition;
 import app.compmanager.competition.CompetitionService;
@@ -19,7 +20,7 @@ public class DivisionService {
 		return Division.listAll();
 	}
 
-	public Division getDivisionById(Long id) {
+	public Division getDivisionById(UUID id) {
 		Division division = Division.findById(id);
 		if (division == null) {
 			throw new NotFoundException("Division with id " + id + " not found");
@@ -40,7 +41,7 @@ public class DivisionService {
 	}
 
 	@Transactional
-	public Division updateDivision(Long id, DivisionUpdateRequest request) {
+	public Division updateDivision(UUID id, DivisionUpdateRequest request) {
 		Division division = getDivisionById(id);
 
 		if (request.name != null) {
@@ -54,7 +55,7 @@ public class DivisionService {
 	}
 
 	@Transactional
-	public void deleteDivision(Long id) {
+	public void deleteDivision(UUID id) {
 		boolean deleted = Division.deleteById(id);
 		if (!deleted) {
 			throw new NotFoundException("Division with id " + id + " not found");

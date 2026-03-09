@@ -1,9 +1,11 @@
 package app.compmanager.division;
 
+import java.util.UUID;
+
 public class DivisionUpdateRequest {
 
 	public String name;
 
-	public Long competitionId;
+	public UUID competitionId;
 
 }

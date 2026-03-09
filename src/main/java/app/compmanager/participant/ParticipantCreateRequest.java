@@ -1,6 +1,7 @@
 package app.compmanager.participant;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -20,10 +21,10 @@ public class ParticipantCreateRequest {
 	public ParticipantGender gender;
 
 	@NotNull(message = "Competition id is mandatory")
-	public Long competitionId;
+	public UUID competitionId;
 
 	@NotNull(message = "Division id is mandatory")
-	public Long divisionId;
+	public UUID divisionId;
 
 	public ParticipantStatus status;
 

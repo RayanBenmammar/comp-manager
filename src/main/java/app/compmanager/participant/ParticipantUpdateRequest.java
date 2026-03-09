@@ -1,6 +1,7 @@
 package app.compmanager.participant;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.validation.constraints.Email;
 
@@ -15,9 +16,9 @@ public class ParticipantUpdateRequest {
 
 	public ParticipantGender gender;
 
-	public Long competitionId;
+	public UUID competitionId;
 
-	public Long divisionId;
+	public UUID divisionId;
 
 	public ParticipantStatus status;
 

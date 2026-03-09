@@ -2,6 +2,7 @@ package app.compmanager.division;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -25,7 +26,7 @@ public class DivisionResource {
 
 	@GET
 	@Path("/{id}")
-	public Division getDivisionById(@PathParam("id") Long id) {
+	public Division getDivisionById(@PathParam("id") UUID id) {
 		return service.getDivisionById(id);
 	}
 
@@ -39,14 +40,14 @@ public class DivisionResource {
 
 	@PUT
 	@Path("/{id}")
-	public Response updateDivision(@PathParam("id") Long id, @Valid DivisionUpdateRequest request) {
+	public Response updateDivision(@PathParam("id") UUID id, @Valid DivisionUpdateRequest request) {
 		Division division = service.updateDivision(id, request);
 		return Response.ok(division).build();
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteDivision(@PathParam("id") Long id) {
+	public Response deleteDivision(@PathParam("id") UUID id) {
 		service.deleteDivision(id);
 		return Response.noContent().build();
 	}

@@ -1,6 +1,7 @@
 package app.compmanager.participant;
 
 import java.util.List;
+import java.util.UUID;
 
 import app.compmanager.competition.Competition;
 import app.compmanager.competition.CompetitionService;
@@ -25,7 +26,7 @@ public class ParticipantService {
 		return Participant.listAll();
 	}
 
-	public Participant getParticipantById(Long id) {
+	public Participant getParticipantById(UUID id) {
 		Participant participant = Participant.findById(id);
 		if (participant == null) {
 			throw new NotFoundException("Participant with id " + id + " not found");
@@ -58,7 +59,7 @@ public class ParticipantService {
 	}
 
 	@Transactional
-	public Participant updateParticipant(Long id, ParticipantUpdateRequest request) {
+	public Participant updateParticipant(UUID id, ParticipantUpdateRequest request) {
 		Participant participant = getParticipantById(id);
 
 		Competition competition = participant.competition;
@@ -98,7 +99,7 @@ public class ParticipantService {
 	}
 
 	@Transactional
-	public void deleteParticipant(Long id) {
+	public void deleteParticipant(UUID id) {
 		boolean deleted = Participant.deleteById(id);
 		if (!deleted) {
 			throw new NotFoundException("Participant with id " + id + " not found");

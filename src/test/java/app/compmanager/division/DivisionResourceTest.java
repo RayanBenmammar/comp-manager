@@ -12,16 +12,16 @@ class DivisionResourceTest {
 
     @Test
     void testCreateUpdateAndDeleteDivision() {
-        Integer competitionId = createCompetition("Division Test Competition");
+        String competitionId = createCompetition("Division Test Competition");
 
         String createBody = """
                 {
                     "name": "Rx Men",
-                    "competitionId": %d
+                    "competitionId": "%s"
                 }
                 """.formatted(competitionId);
 
-        Integer divisionId = given()
+        String divisionId = given()
                 .contentType(ContentType.JSON)
                 .body(createBody)
                 .when().post("/api/divisions")
@@ -63,7 +63,7 @@ class DivisionResourceTest {
                 .statusCode(404);
     }
 
-    private Integer createCompetition(String name) {
+    private String createCompetition(String name) {
         String body = """
                 {
                     "name": "%s",

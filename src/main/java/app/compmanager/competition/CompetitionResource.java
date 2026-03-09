@@ -2,6 +2,7 @@ package app.compmanager.competition;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -25,7 +26,7 @@ public class CompetitionResource {
 
     @GET
     @Path("/{id}")
-    public Competition getCompetitionById(@PathParam("id") Long id ) {
+    public Competition getCompetitionById(@PathParam("id") UUID id ) {
         return service.getCompetitionById(id);
     }
 
@@ -41,14 +42,14 @@ public class CompetitionResource {
 
     @PUT
     @Path("/{id}")  
-    public Response updateCompetition(@PathParam("id") Long id, @Valid CompetitionUpdateRequest request) {
+    public Response updateCompetition(@PathParam("id") UUID id, @Valid CompetitionUpdateRequest request) {
         Competition competition = service.updateCompetition(id, request);
         return Response.ok(competition).build();
     }
 
     @DELETE
     @Path("/{id}")
-    public Response deleteCompetition(@PathParam("id") Long id) {
+    public Response deleteCompetition(@PathParam("id") UUID id) {
         service.deleteCompetition(id);
         return Response.noContent().build();
     }

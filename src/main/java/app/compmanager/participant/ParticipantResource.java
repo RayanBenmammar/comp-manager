@@ -2,6 +2,7 @@ package app.compmanager.participant;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -25,7 +26,7 @@ public class ParticipantResource {
 
 	@GET
 	@Path("/{id}")
-	public Participant getParticipantById(@PathParam("id") Long id) {
+	public Participant getParticipantById(@PathParam("id") UUID id) {
 		return service.getParticipantById(id);
 	}
 
@@ -39,14 +40,14 @@ public class ParticipantResource {
 
 	@PUT
 	@Path("/{id}")
-	public Response updateParticipant(@PathParam("id") Long id, @Valid ParticipantUpdateRequest request) {
+	public Response updateParticipant(@PathParam("id") UUID id, @Valid ParticipantUpdateRequest request) {
 		Participant participant = service.updateParticipant(id, request);
 		return Response.ok(participant).build();
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteParticipant(@PathParam("id") Long id) {
+	public Response deleteParticipant(@PathParam("id") UUID id) {
 		service.deleteParticipant(id);
 		return Response.noContent().build();
 	}

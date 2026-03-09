@@ -8,6 +8,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class CompetitionService {
@@ -16,7 +17,7 @@ public class CompetitionService {
         return Competition.listAll();
     }
 
-    public Competition getCompetitionById(Long id) {
+    public Competition getCompetitionById(UUID id) {
         Competition competition = Competition.findById(id);
         if(competition == null) {
             throw new NotFoundException("Competition with id " + id + " not found");
@@ -49,7 +50,7 @@ public class CompetitionService {
     
 
     @Transactional
-    public Competition updateCompetition(Long id, CompetitionUpdateRequest request) {
+    public Competition updateCompetition(UUID id, CompetitionUpdateRequest request) {
         Competition competition = Competition.findById(id);
         if(competition == null) {
             throw new NotFoundException("Competition with id " + id + " not found");
@@ -79,7 +80,7 @@ public class CompetitionService {
     }
 
     @Transactional
-    public void deleteCompetition(Long id) {
+    public void deleteCompetition(UUID id) {
         boolean deleted = Competition.deleteById(id);
         if (!deleted) {
             throw new NotFoundException("Competition with id " + id + " not found");

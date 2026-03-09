@@ -12,9 +12,9 @@ class ParticipantResourceTest {
 
     @Test
     void testCreateUpdateAndDeleteParticipant() {
-        Integer competitionId = createCompetition("Participant Test Competition");
-        Integer rxDivisionId = createDivision("Rx Women", competitionId);
-        Integer scaledDivisionId = createDivision("Scaled Women", competitionId);
+        String competitionId = createCompetition("Participant Test Competition");
+        String rxDivisionId = createDivision("Rx Women", competitionId);
+        String scaledDivisionId = createDivision("Scaled Women", competitionId);
 
         String createBody = """
                 {
@@ -22,12 +22,12 @@ class ParticipantResourceTest {
                     "lastName": "Martin",
                     "email": "alice@example.com",
                     "gender": "FEMALE",
-                    "competitionId": %d,
-                    "divisionId": %d
+                    "competitionId": "%s",
+                    "divisionId": "%s"
                 }
                 """.formatted(competitionId, rxDivisionId);
 
-        Integer participantId = given()
+        String participantId = given()
                 .contentType(ContentType.JSON)
                 .body(createBody)
                 .when().post("/api/participants")
@@ -38,6 +38,7 @@ class ParticipantResourceTest {
                 .body("status", is("REGISTERED"))
                 .body("competition.id", is(competitionId))
                 .body("division.id", is(rxDivisionId))
+                .body("division.competition", is((Object) null))
                 .extract().path("id");
 
         given()
@@ -49,7 +50,7 @@ class ParticipantResourceTest {
 
         String updateBody = """
                 {
-                    "divisionId": %d,
+                    "divisionId": "%s",
                     "status": "CONFIRMED"
                 }
                 """.formatted(scaledDivisionId);
@@ -74,7 +75,7 @@ class ParticipantResourceTest {
                 .statusCode(404);
     }
 
-    private Integer createCompetition(String name) {
+    private String createCompetition(String name) {
         String body = """
                 {
                     "name": "%s",
@@ -92,11 +93,11 @@ class ParticipantResourceTest {
                 .extract().path("id");
     }
 
-    private Integer createDivision(String name, Integer competitionId) {
+    private String createDivision(String name, String competitionId) {
         String body = """
                 {
                     "name": "%s",
-                    "competitionId": %d
+                    "competitionId": "%s"
                 }
                 """.formatted(name, competitionId);
 

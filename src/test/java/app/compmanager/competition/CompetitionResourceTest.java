@@ -25,7 +25,7 @@ class CompetitionResourceTest {
                 }
                 """;
 
-        Integer id = given()
+        String id = given()
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when().post("/api/competitions")
@@ -90,7 +90,7 @@ class CompetitionResourceTest {
                 }
                 """;
 
-        Integer id = given()
+        String id = given()
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when().post("/api/competitions")
